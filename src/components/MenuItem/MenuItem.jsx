@@ -1,23 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCard, plusCartItem, minusCartItem, removeCartItem } from '../../redux/actions';
-import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 
 const MenuItem = ({ product }) => {
   const dispatch = useDispatch();
-  const [isVisible, setIsVisible] = useState(false);
   const cart = useSelector(rootReducer => rootReducer.cart.cart);
-  const ref = useRef();
-
-  useIntersectionObserver({
-    target: ref,
-    onIntersect: ([{ isIntersecting }], observerElement) => {
-      if (isIntersecting) {
-        setIsVisible(true);
-        observerElement.unobserve(ref.current);
-      }
-    }
-  });
 
   const addToCartHandler = () => {
     dispatch(addToCard(product));
@@ -39,10 +26,8 @@ const MenuItem = ({ product }) => {
     <> 
       { product && (
           <div className="card__container">
-            <div ref={ref} className="card__img-cotainer" >
-              {
-                isVisible && <img src={product.img} alt={product.name} className="card__img" />
-              }
+            <div className="card__img-cotainer" >
+              <img src={product.img} alt={product.name} className="card__img" />
               
               {
                 cart && cart.hasOwnProperty(product.id) ? (
