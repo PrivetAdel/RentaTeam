@@ -17,7 +17,6 @@ const Header = () => {
   const cartButtonClickHandler = () => {
     if (totalPrice !== 0) {
       if (deliveryOption === 'delivery' && (!address.street || !address.house)) {
-        console.log('!')
         dispatch(showTooltip(true));
         return;
       }
