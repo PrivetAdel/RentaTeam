@@ -2,11 +2,11 @@ import axios from 'axios';
 import { SET_CATEGORIES, SET_PRODUCTS, SET_DELIVERY_OPTION, ADD_TO_CART, MINUS_CART_ITEM, PLUS_CART_ITEM, REMOVE_CART_ITEM, CLEAR_CART, SET_DELIVERY_ADDRESS, SHOW_TOOLTIP } from '../constants';
 
 export const fetchData = () => (dispatch) => {
-  axios.get('http://localhost:3001/categories')
+  axios.get('/categories')
     .then(res => dispatch(setCategories(res.data)))
     .catch(error => console.error('Error', error));
 
-  axios.get('http://localhost:3001/products')
+  axios.get('/products')
     .then(res => dispatch(setProducts(res.data)))
     .catch(error => console.error('Error', error));
 };
@@ -17,7 +17,7 @@ export const setCategories = (categories) => ({
 });
 
 export const fetchProducts = () => (dispatch) => {
-  axios.get('http://localhost:3001/products')
+  axios.get('/products')
     .then(res => dispatch(setProducts(res.data)))
     .catch(error => console.error('Error', error))
 };
